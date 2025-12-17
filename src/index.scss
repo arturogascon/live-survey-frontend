@@ -1,0 +1,30 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  padding: 2rem 3rem;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid gray;
+}
+
+button {
+  cursor: pointer;
+
+  &:hover:enabled {
+    filter: brightness(0.8);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+a {
+  cursor: pointer;
+}

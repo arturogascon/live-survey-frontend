@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+span[class^="mgc_"] {
+  font-size: 24px;
+}
+
+[class^="mgc_"]::before,
+[class*=" mgc_"]::before {
+  color: inherit !important;
+}
+
+@layer base {
+  h2 {
+    @apply text-2xl mb-6 font-semibold;
+  }
+
+  input {
+    @apply mb-4;
+  }
+
+  label {
+    @apply mb-2;
+  }
+
+  button:disabled {
+    @apply text-slate-400;
+  }
+}
+
+@theme {
+  --border-inset: "inset";
+}
