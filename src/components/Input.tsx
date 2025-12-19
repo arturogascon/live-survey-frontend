@@ -1,48 +1,21 @@
-import { type ChangeEventHandler, type Ref } from "react";
+import { type InputHTMLAttributes, type Ref } from "react";
 
-type Props = {
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  name: string;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  placeholder?: string;
-  type?: string;
   error?: string;
   ref?: Ref<HTMLInputElement>;
-};
+}
 
-const Input = ({
-  value,
-  onChange,
-  type = "text",
-  name,
-  label,
-  placeholder,
-  error,
-  ref,
-}: Props) => {
+const Input = ({ error, label, name, ref, ...rest }: InputProps) => {
   return (
     <div className="inline-flex flex-col">
       <label
-        className={`inline-block h-4 text-xs mb-1 ${
-          error && "visible error-label"
-        } ${label && "visible"}`}
+        className={`inline-block h-4 text-xs mb-1 ${error && "error-label"}`}
         htmlFor={name}
       >
         {error || label}
       </label>
-      <input
-        className="w-[400px]"
-        id={name}
-        name={name}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        autoComplete="off"
-        required
-        ref={ref}
-      />
+      <input className="w-[400px]" id={name} name={name} ref={ref} {...rest} />
     </div>
   );
 };

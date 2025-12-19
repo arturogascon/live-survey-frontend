@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
@@ -44,7 +44,6 @@ const Login = () => {
           required
         />
         <input
-          className="mb-2"
           name="password"
           type="password"
           value={form.password}
@@ -53,13 +52,17 @@ const Login = () => {
           required
         />
         <button
-          className="button self-center"
+          className="button self-center mb-2"
           type="submit"
           disabled={!form.email || !form.password}
         >
           {loginMutation.isPending ? "Ingresando" : "Entrar"}
         </button>
       </form>
+      <div className="divider"></div>
+      <Link to="/signup" className="link text-sm">
+        Registrarse
+      </Link>
     </div>
   );
 };
