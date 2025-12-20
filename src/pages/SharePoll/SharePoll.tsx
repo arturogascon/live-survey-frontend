@@ -6,7 +6,7 @@ import styles from "./SharePoll.module.scss";
 const SharePoll = () => {
   const [isUrlCopied, setIsUrlCopied] = useState<boolean>(false);
   const { id } = useParams();
-  const publicUrl = `${window.location.origin}/vote/${id}`;
+  const publicUrl = `${window.location.origin}/poll/${id}`;
 
   const handleCopyUrl = async () => {
     await navigator.clipboard.writeText(publicUrl);

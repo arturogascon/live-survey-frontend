@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useVote } from "../../hooks/useVote";
 import { useVoteRealTime } from "../../hooks/useVoteRealTime";
 import { getIsPollVoted } from "../../utils/voteStorage";
@@ -6,8 +6,10 @@ import { useGetPoll } from "../../hooks/usePoll";
 
 const PollPage = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
 
-  const showResults = getIsPollVoted(id!);
+  const showResults =
+    searchParams.get("results") === "true" || getIsPollVoted(id!);
 
   const { data: poll, isLoading, error: queryError } = useGetPoll(id!);
 
@@ -51,7 +53,7 @@ const PollPage = () => {
                 key={option._id}
                 className="flex flex-row gap-x-3 w-full justify-between items-center"
               >
-                <p className="text-xl font-semibold basis-[100px] text-left text-ellipsis">
+                <p className="text-lg sm:text-xl basis-[100px] text-left text-ellipsis">
                   {option.text}
                 </p>
                 <div className="h-5 flex-1">
@@ -60,17 +62,17 @@ const PollPage = () => {
                     style={{ width: `${votedPerecentage}%` }}
                   ></div>
                 </div>
-                <p className="text-xl font-semibold">{`${votedPerecentage}%`}</p>
+                <p className="text-lg sm:text-xl">{`${votedPerecentage}%`}</p>
               </div>
             );
           })}
         </div>
       ) : (
-        <form className="flex flex-row justify-center">
+        <form className="flex flex-col sm:flex-row justify-center flex-wrap gap-y-3">
           {poll?.options.map((option) => (
             <button
               key={option._id}
-              className="mx-2 text-xl bg-green-500 py-1 px-3 border [border-style:inset] border-green-200 rounded-lg"
+              className="mx-2 text-lg bg-green-500 px-3 border [border-style:inset] border-green-200 rounded-lg"
               type="button"
               onClick={() => mutate(option._id)}
             >
